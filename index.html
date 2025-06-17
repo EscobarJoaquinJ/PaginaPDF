@@ -1,13 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>HTML + CSS</title>
+    <title>Formulario Curso de Verano</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>This is a simple HTML + CSS template</h1>
+    <h1>Formulario Curso de Verano</h1>
+
+    <form id="formulario">
+      <fieldset>
+        <legend>Datos del Alumno</legend>
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required /><br /><br />
+
+        <label for="categoria">Categoría:</label>
+        <input
+          type="text"
+          id="categoria"
+          name="categoria"
+          required
+        /><br /><br />
+
+        <label for="folio">Folio:</label>
+        <input type="text" id="folio" name="folio" required /><br /><br />
+
+        <label for="fotoAlumno">Foto del alumno:</label>
+        <input
+          type="file"
+          id="fotoAlumno"
+          name="fotoAlumno"
+          accept="image/*"
+          required
+        /><br /><br />
+      </fieldset>
+
+      <fieldset>
+        <legend>Personas Autorizadas para Recoger al Alumno</legend>
+
+        <div class="autorizado">
+          <label for="autorizado1">Nombre 1:</label>
+          <input
+            type="text"
+            id="autorizado1"
+            name="autorizado1"
+            required
+          /><br />
+          <label for="foto1">Foto:</label>
+          <input
+            type="file"
+            id="foto1"
+            name="foto1"
+            accept="image/*"
+            required
+          /><br /><br />
+        </div>
+
+        <div class="autorizado">
+          <label for="autorizado2">Nombre 2:</label>
+          <input
+            type="text"
+            id="autorizado2"
+            name="autorizado2"
+            required
+          /><br />
+          <label for="foto2">Foto:</label>
+          <input
+            type="file"
+            id="foto2"
+            name="foto2"
+            accept="image/*"
+            required
+          /><br /><br />
+        </div>
+
+        <div class="autorizado">
+          <label for="autorizado3">Nombre 3:</label>
+          <input
+            type="text"
+            id="autorizado3"
+            name="autorizado3"
+            required
+          /><br />
+          <label for="foto3">Foto:</label>
+          <input
+            type="file"
+            id="foto3"
+            name="foto3"
+            accept="image/*"
+            required
+          /><br /><br />
+        </div>
+      </fieldset>
+
+      <button type="submit">Generar PDF</button>
+    </form>
+
+    <script src="script.js"></script>
   </body>
 </html>
