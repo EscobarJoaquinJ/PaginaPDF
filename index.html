@@ -4,99 +4,533 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario Curso de Verano</title>
-    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .form-container {
+        padding: 40px;
+      }
+
+      fieldset {
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+        background: #f9fafb;
+      }
+
+      legend {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #4f46e5;
+        padding: 0 15px;
+        background: white;
+        border-radius: 5px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px dashed #d1d5db;
+        border-radius: 8px;
+        background: #f9fafb;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="file"]:hover {
+        border-color: #4f46e5;
+      }
+
+      .autorizado {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #e5e7eb;
+      }
+
+      .autorizado h4 {
+        color: #4f46e5;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+
+      .submit-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
+      }
+
+      .preview-container {
+        margin-top: 15px;
+        display: none;
+      }
+
+      .preview-img {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 8px;
+        border: 2px solid #e5e7eb;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          margin: 10px;
+        }
+        
+        .header h1 {
+          font-size: 2rem;
+        }
+        
+        .form-container {
+          padding: 20px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Formulario Curso de Verano</h1>
+    <div class="container">
+      <div class="header">
+        <h1>🏕 Aventura</h1>
+        <p>Formulario Curso de Verano</p>
+      </div>
 
-    <form id="formulario">
-      <fieldset>
-        <legend>Datos del Alumno</legend>
-        <label for="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" name="nombre" required /><br /><br />
+      <div class="form-container">
+        <form id="formulario">
+          <fieldset>
+            <legend>📋 Datos del Alumno</legend>
+            
+            <div class="form-group">
+              <label for="nombre">Nombre completo:</label>
+              <input type="text" id="nombre" name="nombre" required placeholder="Ingresa el nombre completo del alumno" />
+            </div>
 
-        <label for="categoria">Categoría:</label>
-        <input
-          type="text"
-          id="categoria"
-          name="categoria"
-          required
-        /><br /><br />
+            <div class="form-group">
+              <label for="categoria">Categoría:</label>
+              <input type="text" id="categoria" name="categoria" required placeholder="Ej: Infantil, Juvenil, etc." />
+            </div>
 
-        <label for="folio">Folio:</label>
-        <input type="text" id="folio" name="folio" required /><br /><br />
+            <div class="form-group">
+              <label for="folio">Folio:</label>
+              <input type="text" id="folio" name="folio" required placeholder="Número de folio" />
+            </div>
 
-        <label for="fotoAlumno">Foto del alumno:</label>
-        <input
-          type="file"
-          id="fotoAlumno"
-          name="fotoAlumno"
-          accept="image/*"
-          required
-        /><br /><br />
-      </fieldset>
+            <div class="form-group">
+              <label for="fotoAlumno">Foto del alumno:</label>
+              <input type="file" id="fotoAlumno" name="fotoAlumno" accept="image/*" required />
+              <div class="preview-container" id="previewAlumno">
+                <img class="preview-img" id="imgAlumno" alt="Vista previa" />
+              </div>
+            </div>
+          </fieldset>
 
-      <fieldset>
-        <legend>Personas Autorizadas para Recoger al Alumno</legend>
+          <fieldset>
+            <legend>👥 Personas Autorizadas para Recoger al Alumno</legend>
 
-        <div class="autorizado">
-          <label for="autorizado1">Nombre 1:</label>
-          <input
-            type="text"
-            id="autorizado1"
-            name="autorizado1"
-            required
-          /><br />
-          <label for="foto1">Foto:</label>
-          <input
-            type="file"
-            id="foto1"
-            name="foto1"
-            accept="image/*"
-            required
-          /><br /><br />
-        </div>
+            <div class="autorizado">
+              <h4>Persona Autorizada #1</h4>
+              <div class="form-group">
+                <label for="autorizado1">Nombre completo:</label>
+                <input type="text" id="autorizado1" name="autorizado1" required placeholder="Nombre de la primera persona autorizada" />
+              </div>
+              <div class="form-group">
+                <label for="foto1">Foto:</label>
+                <input type="file" id="foto1" name="foto1" accept="image/*" required />
+                <div class="preview-container" id="preview1">
+                  <img class="preview-img" id="img1" alt="Vista previa" />
+                </div>
+              </div>
+            </div>
 
-        <div class="autorizado">
-          <label for="autorizado2">Nombre 2:</label>
-          <input
-            type="text"
-            id="autorizado2"
-            name="autorizado2"
-            required
-          /><br />
-          <label for="foto2">Foto:</label>
-          <input
-            type="file"
-            id="foto2"
-            name="foto2"
-            accept="image/*"
-            required
-          /><br /><br />
-        </div>
+            <div class="autorizado">
+              <h4>Persona Autorizada #2</h4>
+              <div class="form-group">
+                <label for="autorizado2">Nombre completo:</label>
+                <input type="text" id="autorizado2" name="autorizado2" required placeholder="Nombre de la segunda persona autorizada" />
+              </div>
+              <div class="form-group">
+                <label for="foto2">Foto:</label>
+                <input type="file" id="foto2" name="foto2" accept="image/*" required />
+                <div class="preview-container" id="preview2">
+                  <img class="preview-img" id="img2" alt="Vista previa" />
+                </div>
+              </div>
+            </div>
 
-        <div class="autorizado">
-          <label for="autorizado3">Nombre 3:</label>
-          <input
-            type="text"
-            id="autorizado3"
-            name="autorizado3"
-            required
-          /><br />
-          <label for="foto3">Foto:</label>
-          <input
-            type="file"
-            id="foto3"
-            name="foto3"
-            accept="image/*"
-            required
-          /><br /><br />
-        </div>
-      </fieldset>
+            <div class="autorizado">
+              <h4>Persona Autorizada #3</h4>
+              <div class="form-group">
+                <label for="autorizado3">Nombre completo:</label>
+                <input type="text" id="autorizado3" name="autorizado3" required placeholder="Nombre de la tercera persona autorizada" />
+              </div>
+              <div class="form-group">
+                <label for="foto3">Foto:</label>
+                <input type="file" id="foto3" name="foto3" accept="image/*" required />
+                <div class="preview-container" id="preview3">
+                  <img class="preview-img" id="img3" alt="Vista previa" />
+                </div>
+              </div>
+            </div>
+          </fieldset>
 
-      <button type="submit">Generar PDF</button>
-    </form>
+          <button type="submit" class="submit-btn">
+            📄 Generar PDF
+          </button>
+        </form>
+      </div>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+      // Preview de imágenes
+      function setupImagePreview(inputId, previewId, imgId) {
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewId);
+        const img = document.getElementById(imgId);
+
+        input.addEventListener('change', function(e) {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              img.src = e.target.result;
+              preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+
+      // Configurar previews
+      setupImagePreview('fotoAlumno', 'previewAlumno', 'imgAlumno');
+      setupImagePreview('foto1', 'preview1', 'img1');
+      setupImagePreview('foto2', 'preview2', 'img2');
+      setupImagePreview('foto3', 'preview3', 'img3');
+
+      // Función para convertir imagen a base64
+      function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+        });
+      }
+
+      // Función principal para generar PDF
+      async function generatePDF(formData) {
+        const { jsPDF } = window.jspdf;
+        
+        // Crear PDF en formato carta
+        const pdf = new jsPDF('p', 'mm', 'letter');
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        // Colores
+        const primaryColor = [79, 70, 229]; // Azul púrpura
+        const secondaryColor = [124, 58, 237]; // Púrpura
+        const textColor = [55, 65, 81]; // Gris oscuro
+
+        // ==================== PÁGINA 1: DATOS DEL ALUMNO ====================
+        
+        // Fondo degradado (simulado con rectángulos)
+        pdf.setFillColor(240, 240, 255);
+        pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+        
+        // Elementos decorativos laterales
+        pdf.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+        pdf.triangle(10, 20, 25, 5, 40, 20, 'F');
+        pdf.setFillColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
+        pdf.triangle(pageWidth - 40, 20, pageWidth - 25, 5, pageWidth - 10, 20, 'F');
+
+        // Título "AVENTURA"
+        pdf.setFontSize(36);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+        pdf.text('AVENTURA', pageWidth / 2, 35, { align: 'center' });
+
+        // Elementos decorativos (simulando fogata y antorcha)
+        pdf.setFillColor(255, 140, 0);
+        pdf.circle(50, 40, 3, 'F');
+        pdf.setFillColor(255, 69, 0);
+        pdf.circle(pageWidth - 50, 40, 3, 'F');
+
+        // Marco para foto del alumno
+        const photoX = 40;
+        const photoY = 60;
+        const photoWidth = 50;
+        const photoHeight = 60;
+        
+        // Fondo rosa para el marco
+        pdf.setFillColor(255, 192, 203);
+        pdf.roundedRect(photoX - 3, photoY - 3, photoWidth + 6, photoHeight + 6, 3, 3, 'F');
+        
+        // Marco blanco
+        pdf.setFillColor(255, 255, 255);
+        pdf.roundedRect(photoX, photoY, photoWidth, photoHeight, 2, 2, 'F');
+
+        // Insertar foto del alumno
+        if (formData.fotoAlumno) {
+          try {
+            pdf.addImage(formData.fotoAlumno, 'JPEG', photoX + 2, photoY + 2, photoWidth - 4, photoHeight - 4);
+          } catch (error) {
+            console.error('Error al agregar foto del alumno:', error);
+          }
+        }
+
+        // Campo NOMBRE
+        pdf.setFillColor(52, 152, 219);
+        pdf.roundedRect(40, 135, 130, 12, 2, 2, 'F');
+        pdf.setFontSize(12);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setTextColor(255, 255, 255);
+        pdf.text('NOMBRE', 45, 143);
+        
+        // Valor del nombre
+        pdf.setFontSize(14);
+        pdf.setFont('helvetica', 'normal');
+        pdf.setTextColor(textColor[0], textColor[1], textColor[2]);
+        pdf.text(formData.nombre || '', 45, 158);
+
+        // Campo CATEGORÍA
+        pdf.setFillColor(52, 152, 219);
+        pdf.roundedRect(40, 175, 130, 12, 2, 2, 'F');
+        pdf.setFontSize(12);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setTextColor(255, 255, 255);
+        pdf.text('CATEGORÍA:', 45, 183);
+        
+        // Valor de la categoría
+        pdf.setFontSize(14);
+        pdf.setFont('helvetica', 'normal');
+        pdf.setTextColor(textColor[0], textColor[1], textColor[2]);
+        pdf.text(formData.categoria || '', 45, 198);
+
+        // Campo FOLIO con código de barras
+        pdf.setFillColor(52, 152, 219);
+        pdf.roundedRect(40, 215, 130, 12, 2, 2, 'F');
+        pdf.setFontSize(12);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setTextColor(255, 255, 255);
+        pdf.text('FOLIO:', 45, 223);
+          
+        // Texto del folio
+        pdf.setFontSize(10);
+        pdf.setTextColor(textColor[0], textColor[1], textColor[2]);
+        pdf.text(formData.folio, 75, 240, { align: 'justify' });
+
+        // Dragón decorativo (simulado con formas)
+        pdf.setFillColor(52, 152, 219);
+        pdf.circle(15, 180, 8, 'F');
+        pdf.setFillColor(255, 255, 255);
+        pdf.circle(12, 175, 2, 'F');
+        pdf.circle(18, 175, 2, 'F');
+
+        // ==================== PÁGINA 2: PERSONAS AUTORIZADAS ====================
+        
+        pdf.addPage();
+        
+        // Fondo de la segunda página
+        pdf.setFillColor(240, 240, 255);
+        pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+        // Título
+        pdf.setFontSize(18);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+        pdf.text('PERSONAS AUTORIZADAS PARA', 20, 30);
+        pdf.text('RECOGER AL NIÑO', 20, 45);
+
+        // Configuración para las tres personas autorizadas
+        const personasData = [
+          { nombre: formData.autorizado1, foto: formData.foto1 },
+          { nombre: formData.autorizado2, foto: formData.foto2 },
+          { nombre: formData.autorizado3, foto: formData.foto3 }
+        ];
+
+        let currentY = 70;
+        
+        personasData.forEach((persona, index) => {
+          // Marco para foto
+          const fotoX = 20;
+          const fotoY = currentY;
+          const fotoSize = 35;
+          
+          // Fondo azul oscuro para el marco de foto
+          pdf.setFillColor(41, 128, 185);
+          pdf.roundedRect(fotoX - 2, fotoY - 2, fotoSize + 4, fotoSize + 4, 2, 2, 'F');
+          
+          // Marco blanco para la foto
+          pdf.setFillColor(255, 255, 255);
+          pdf.roundedRect(fotoX, fotoY, fotoSize, fotoSize, 1, 1, 'F');
+
+          // Insertar foto
+          if (persona.foto) {
+            try {
+              pdf.addImage(persona.foto, 'JPEG', fotoX + 1, fotoY + 1, fotoSize - 2, fotoSize - 2);
+            } catch (error) {
+              console.error(Error al agregar foto ${index + 1}:, error);
+            }
+          }
+
+          // Campos de información
+          const fieldX = 70;
+          const fieldWidth = 120;
+          const fieldHeight = 8;
+          
+          // Tres campos por persona
+          for (let i = 0; i < 1; i++) {
+            const fieldY = currentY + (i * 12);
+            
+            // Fondo azul para el campo
+            pdf.setFillColor(52, 152, 219);
+            pdf.roundedRect(fieldX, fieldY, fieldWidth, fieldHeight, 1, 1, 'F');
+            
+            // Texto del nombre solo en el primer campo
+            if (i === 0 && persona.nombre) {
+              pdf.setFontSize(10);
+              pdf.setFont('helvetica', 'normal');
+              pdf.setTextColor(255, 255, 255);
+              pdf.text(persona.nombre, fieldX + 3, fieldY + 5);
+            }
+          }
+          
+          currentY += 60;
+        });
+
+        // Elementos decorativos laterales
+        pdf.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+        pdf.triangle(pageWidth - 30, 100, pageWidth - 15, 85, pageWidth - 5, 100, 'F');
+        pdf.triangle(pageWidth - 30, 160, pageWidth - 15, 145, pageWidth - 5, 160, 'F');
+        pdf.triangle(pageWidth - 30, 220, pageWidth - 15, 205, pageWidth - 5, 220, 'F');
+
+        // Guardar el PDF
+        const fileName = Aventura_${formData.nombre ? formData.nombre.replace(/\s+/g, '_') : 'Alumno'}_${formData.folio || 'Sin_Folio'}.pdf;
+        pdf.save(fileName);
+      }
+
+      // Manejar envío del formulario
+      document.getElementById('formulario').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        
+        try {
+          // Cambiar texto del botón
+          submitBtn.textContent = '📄 Generando PDF...';
+          submitBtn.disabled = true;
+
+          // Recopilar datos del formulario
+          const formData = {
+            nombre: document.getElementById('nombre').value,
+            categoria: document.getElementById('categoria').value,
+            folio: document.getElementById('folio').value,
+            autorizado1: document.getElementById('autorizado1').value,
+            autorizado2: document.getElementById('autorizado2').value,
+            autorizado3: document.getElementById('autorizado3').value
+          };
+
+          // Convertir imágenes a base64
+          const files = ['fotoAlumno', 'foto1', 'foto2', 'foto3'];
+          for (const fileId of files) {
+            const fileInput = document.getElementById(fileId);
+            if (fileInput.files[0]) {
+              formData[fileId] = await fileToBase64(fileInput.files[0]);
+            }
+          }
+
+          // Generar PDF
+          await generatePDF(formData);
+          
+          // Mostrar mensaje de éxito
+          alert('✅ PDF generado exitosamente!');
+          
+        } catch (error) {
+          console.error('Error al generar PDF:', error);
+          alert('❌ Error al generar el PDF. Por favor, intenta nuevamente.');
+        } finally {
+          // Restaurar botón
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }
+      });
+    </script>
   </body>
 </html>
