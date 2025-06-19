@@ -342,11 +342,12 @@
       setupImagePreview("foto3", "preview3", "img3");
 
       // Función para convertir imagen a base64
+      // Modificada para devolver también el tipo de archivo (MIME type)
       function fileToBase64(file) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result);
+          reader.onload = () => resolve({ data: reader.result, type: file.type });
           reader.onerror = (error) => reject(error);
         });
       }
@@ -354,7 +355,6 @@
       // Función principal para generar PDF
       async function generatePDF(formData) {
         const { jsPDF } = window.jspdf;
-
         // Crear PDF en formato 1/8 de carta (71.76mm x 107.94mm / 2.825" x 4.25")
         const pdf = new jsPDF("p", "mm", [71.76, 107.94]);
         const pageWidth = pdf.internal.pageSize.getWidth();
@@ -380,13 +380,11 @@
           secondaryColor[2]
         );
         pdf.triangle(pageWidth - 9, 8, pageWidth - 6, 2, pageWidth - 3, 8, "F");
-
         // Título "AVENTURA" (adaptado al tamaño muy compacto)
         pdf.setFontSize(12);
         pdf.setFont("helvetica", "bold");
         pdf.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
         pdf.text("AVENTURA", pageWidth / 2, 12, { align: "center" });
-
         // Elementos decorativos (muy pequeños)
         pdf.setFillColor(255, 140, 0);
         pdf.circle(12, 14, 1, "F");
@@ -398,7 +396,6 @@
         const photoY = 20;
         const photoWidth = 18;
         const photoHeight = 20;
-
         // Fondo rosa para el marco
         pdf.setFillColor(255, 192, 203);
         pdf.roundedRect(
@@ -410,24 +407,22 @@
           2,
           "F"
         );
-
         // Marco blanco
         pdf.setFillColor(255, 255, 255);
         pdf.roundedRect(photoX, photoY, photoWidth, photoHeight, 1, 1, "F");
-
         // Insertar foto del alumno
-        if (formData.fotoAlumno) {
+        if (formData.fotoAlumno && formData.fotoAlumno.data) {
           try {
             pdf.addImage(
-              formData.fotoAlumno,
-              "JPEG",
+              formData.fotoAlumno.data,
+              formData.fotoAlumno.type, // Usamos el tipo MIME detectado
               photoX + 1,
               photoY + 1,
               photoWidth - 2,
               photoHeight - 2
             );
           } catch (error) {
-            console.error("Error al agregar foto del alumno:", error);
+            console.error(`Error al agregar foto del alumno:`, error); // Corregido: template literal
           }
         }
 
@@ -438,7 +433,6 @@
         pdf.setFont("helvetica", "bold");
         pdf.setTextColor(255, 255, 255);
         pdf.text("NOMBRE", 9, 49);
-
         // Valor del nombre
         pdf.setFontSize(7);
         pdf.setFont("helvetica", "normal");
@@ -452,7 +446,6 @@
         pdf.setFont("helvetica", "bold");
         pdf.setTextColor(255, 255, 255);
         pdf.text("CATEGORÍA:", 9, 66);
-
         // Valor de la categoría
         pdf.setFontSize(7);
         pdf.setFont("helvetica", "normal");
@@ -466,23 +459,19 @@
         pdf.setFont("helvetica", "bold");
         pdf.setTextColor(255, 255, 255);
         pdf.text("FOLIO:", 9, 83);
-
         // Texto del folio
         pdf.setFontSize(6);
         pdf.setTextColor(textColor[0], textColor[1], textColor[2]);
         pdf.text(formData.folio, 9, 90);
-
         // Dragón decorativo (muy pequeño)
         pdf.setFillColor(52, 152, 219);
         pdf.circle(5, 60, 2, "F");
         pdf.setFillColor(255, 255, 255);
         pdf.circle(4, 58, 0.5, "F");
         pdf.circle(6, 58, 0.5, "F");
-
         // ==================== PÁGINA 2: PERSONAS AUTORIZADAS ====================
 
         pdf.addPage();
-
         // Fondo de la segunda página
         pdf.setFillColor(240, 240, 255);
         pdf.rect(0, 0, pageWidth, pageHeight, "F");
@@ -493,17 +482,15 @@
         pdf.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
         pdf.text("PERSONAS AUTORIZADAS", 5, 12);
         pdf.text("PARA RECOGER AL NIÑO", 5, 18);
-
         // Configuración para las tres personas autorizadas
         const personasData = [
           { nombre: formData.autorizado1, foto: formData.foto1 },
           { nombre: formData.autorizado2, foto: formData.foto2 },
           { nombre: formData.autorizado3, foto: formData.foto3 },
         ];
-
         let currentY = 25;
 
-        personasData.forEach((persona, index) => {
+        for (const [index, persona] of personasData.entries()) { // Usamos for...of para acceder al índice
           // Marco para foto (muy pequeño)
           const fotoX = 5;
           const fotoY = currentY;
@@ -526,18 +513,19 @@
           pdf.roundedRect(fotoX, fotoY, fotoSize, fotoSize, 0.5, 0.5, "F");
 
           // Insertar foto
-          if (persona.foto) {
+          if (persona.foto && persona.foto.data) {
             try {
               pdf.addImage(
-                persona.foto,
-                "JPEG",
+                persona.foto.data,
+                persona.foto.type, // Usamos el tipo MIME detectado
                 fotoX + 0.5,
                 fotoY + 0.5,
                 fotoSize - 1,
                 fotoSize - 1
               );
             } catch (error) {
-              console.error(Error al agregar foto ${index + 1}:, error);
+              // *** AQUÍ ESTÁ LA CORRECCIÓN DEL SYNTAXERROR ***
+              console.error(`Error al agregar foto ${index + 1}:`, error);
             }
           }
 
@@ -546,7 +534,6 @@
           const fieldWidth = pageWidth - 25;
           const fieldHeight = 4;
           const fieldY = currentY + 4;
-
           // Fondo azul para el campo
           pdf.setFillColor(52, 152, 219);
           pdf.roundedRect(
@@ -558,7 +545,6 @@
             0.5,
             "F"
           );
-
           // Texto del nombre
           if (persona.nombre) {
             pdf.setFontSize(5);
@@ -568,8 +554,7 @@
           }
 
           currentY += 20;
-        });
-
+        }
         // Elementos decorativos laterales (muy pequeños para el formato compacto)
         pdf.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
         pdf.triangle(
@@ -599,10 +584,10 @@
           75,
           "F"
         );
-
         // Guardar el PDF
         const fileName = `Aventura_${
-          formData.nombre ? formData.nombre.replace(/\s+/g, "_") : "Alumno"
+          formData.nombre ?
+          formData.nombre.replace(/\s+/g, "_") : "Alumno"
         }_${formData.folio || "Sin_Folio"}.pdf`;
         pdf.save(fileName);
       }
@@ -632,6 +617,7 @@
             };
 
             // Convertir imágenes a base64
+            // Ahora la promesa devuelve un objeto { data: base64, type: mimeType }
             const files = ["fotoAlumno", "foto1", "foto2", "foto3"];
             for (const fileId of files) {
               const fileInput = document.getElementById(fileId);
@@ -642,7 +628,6 @@
 
             // Generar PDF
             await generatePDF(formData);
-
             // Mostrar mensaje de éxito
             alert("✅ PDF generado exitosamente!");
           } catch (error) {
