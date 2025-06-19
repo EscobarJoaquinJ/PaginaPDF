@@ -154,11 +154,11 @@
         .container {
           margin: 10px;
         }
-        
+
         .header h1 {
           font-size: 2rem;
         }
-        
+
         .form-container {
           padding: 20px;
         }
@@ -176,25 +176,49 @@
         <form id="formulario">
           <fieldset>
             <legend>📋 Datos del Alumno</legend>
-            
+
             <div class="form-group">
               <label for="nombre">Nombre completo:</label>
-              <input type="text" id="nombre" name="nombre" required placeholder="Ingresa el nombre completo del alumno" />
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                required
+                placeholder="Ingresa el nombre completo del alumno"
+              />
             </div>
 
             <div class="form-group">
               <label for="categoria">Categoría:</label>
-              <input type="text" id="categoria" name="categoria" required placeholder="Ej: Infantil, Juvenil, etc." />
+              <input
+                type="text"
+                id="categoria"
+                name="categoria"
+                required
+                placeholder="Ej: Infantil, Juvenil, etc."
+              />
             </div>
 
             <div class="form-group">
               <label for="folio">Folio:</label>
-              <input type="text" id="folio" name="folio" required placeholder="Número de folio" />
+              <input
+                type="text"
+                id="folio"
+                name="folio"
+                required
+                placeholder="Número de folio"
+              />
             </div>
 
             <div class="form-group">
               <label for="fotoAlumno">Foto del alumno:</label>
-              <input type="file" id="fotoAlumno" name="fotoAlumno" accept="image/*" required />
+              <input
+                type="file"
+                id="fotoAlumno"
+                name="fotoAlumno"
+                accept="image/*"
+                required
+              />
               <div class="preview-container" id="previewAlumno">
                 <img class="preview-img" id="imgAlumno" alt="Vista previa" />
               </div>
@@ -208,11 +232,23 @@
               <h4>Persona Autorizada #1</h4>
               <div class="form-group">
                 <label for="autorizado1">Nombre completo:</label>
-                <input type="text" id="autorizado1" name="autorizado1" required placeholder="Nombre de la primera persona autorizada" />
+                <input
+                  type="text"
+                  id="autorizado1"
+                  name="autorizado1"
+                  required
+                  placeholder="Nombre de la primera persona autorizada"
+                />
               </div>
               <div class="form-group">
                 <label for="foto1">Foto:</label>
-                <input type="file" id="foto1" name="foto1" accept="image/*" required />
+                <input
+                  type="file"
+                  id="foto1"
+                  name="foto1"
+                  accept="image/*"
+                  required
+                />
                 <div class="preview-container" id="preview1">
                   <img class="preview-img" id="img1" alt="Vista previa" />
                 </div>
@@ -223,11 +259,23 @@
               <h4>Persona Autorizada #2</h4>
               <div class="form-group">
                 <label for="autorizado2">Nombre completo:</label>
-                <input type="text" id="autorizado2" name="autorizado2" required placeholder="Nombre de la segunda persona autorizada" />
+                <input
+                  type="text"
+                  id="autorizado2"
+                  name="autorizado2"
+                  required
+                  placeholder="Nombre de la segunda persona autorizada"
+                />
               </div>
               <div class="form-group">
                 <label for="foto2">Foto:</label>
-                <input type="file" id="foto2" name="foto2" accept="image/*" required />
+                <input
+                  type="file"
+                  id="foto2"
+                  name="foto2"
+                  accept="image/*"
+                  required
+                />
                 <div class="preview-container" id="preview2">
                   <img class="preview-img" id="img2" alt="Vista previa" />
                 </div>
@@ -238,11 +286,23 @@
               <h4>Persona Autorizada #3</h4>
               <div class="form-group">
                 <label for="autorizado3">Nombre completo:</label>
-                <input type="text" id="autorizado3" name="autorizado3" required placeholder="Nombre de la tercera persona autorizada" />
+                <input
+                  type="text"
+                  id="autorizado3"
+                  name="autorizado3"
+                  required
+                  placeholder="Nombre de la tercera persona autorizada"
+                />
               </div>
               <div class="form-group">
                 <label for="foto3">Foto:</label>
-                <input type="file" id="foto3" name="foto3" accept="image/*" required />
+                <input
+                  type="file"
+                  id="foto3"
+                  name="foto3"
+                  accept="image/*"
+                  required
+                />
                 <div class="preview-container" id="preview3">
                   <img class="preview-img" id="img3" alt="Vista previa" />
                 </div>
@@ -250,9 +310,7 @@
             </div>
           </fieldset>
 
-          <button type="submit" class="submit-btn">
-            📄 Generar PDF
-          </button>
+          <button type="submit" class="submit-btn">📄 Generar PDF</button>
         </form>
       </div>
     </div>
@@ -264,13 +322,13 @@
         const preview = document.getElementById(previewId);
         const img = document.getElementById(imgId);
 
-        input.addEventListener('change', function(e) {
+        input.addEventListener("change", function (e) {
           const file = e.target.files[0];
           if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
               img.src = e.target.result;
-              preview.style.display = 'block';
+              preview.style.display = "block";
             };
             reader.readAsDataURL(file);
           }
@@ -278,10 +336,10 @@
       }
 
       // Configurar previews
-      setupImagePreview('fotoAlumno', 'previewAlumno', 'imgAlumno');
-      setupImagePreview('foto1', 'preview1', 'img1');
-      setupImagePreview('foto2', 'preview2', 'img2');
-      setupImagePreview('foto3', 'preview3', 'img3');
+      setupImagePreview("fotoAlumno", "previewAlumno", "imgAlumno");
+      setupImagePreview("foto1", "preview1", "img1");
+      setupImagePreview("foto2", "preview2", "img2");
+      setupImagePreview("foto3", "preview3", "img3");
 
       // Función para convertir imagen a base64
       function fileToBase64(file) {
@@ -289,16 +347,16 @@
           const reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = () => resolve(reader.result);
-          reader.onerror = error => reject(error);
+          reader.onerror = (error) => reject(error);
         });
       }
 
       // Función principal para generar PDF
       async function generatePDF(formData) {
         const { jsPDF } = window.jspdf;
-        
-        // Crear PDF en formato carta
-        const pdf = new jsPDF('p', 'mm', 'letter');
+
+        // Crear PDF en formato 1/8 de carta (71.76mm x 107.94mm / 2.825" x 4.25")
+        const pdf = new jsPDF("p", "mm", [71.76, 107.94]);
         const pageWidth = pdf.internal.pageSize.getWidth();
         const pageHeight = pdf.internal.pageSize.getHeight();
 
@@ -308,229 +366,294 @@
         const textColor = [55, 65, 81]; // Gris oscuro
 
         // ==================== PÁGINA 1: DATOS DEL ALUMNO ====================
-        
+
         // Fondo degradado (simulado con rectángulos)
         pdf.setFillColor(240, 240, 255);
-        pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-        
-        // Elementos decorativos laterales
+        pdf.rect(0, 0, pageWidth, pageHeight, "F");
+
+        // Elementos decorativos laterales (muy pequeños para el formato)
         pdf.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-        pdf.triangle(10, 20, 25, 5, 40, 20, 'F');
-        pdf.setFillColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-        pdf.triangle(pageWidth - 40, 20, pageWidth - 25, 5, pageWidth - 10, 20, 'F');
+        pdf.triangle(3, 8, 6, 2, 9, 8, "F");
+        pdf.setFillColor(
+          secondaryColor[0],
+          secondaryColor[1],
+          secondaryColor[2]
+        );
+        pdf.triangle(pageWidth - 9, 8, pageWidth - 6, 2, pageWidth - 3, 8, "F");
 
-        // Título "AVENTURA"
-        pdf.setFontSize(36);
-        pdf.setFont('helvetica', 'bold');
+        // Título "AVENTURA" (adaptado al tamaño muy compacto)
+        pdf.setFontSize(12);
+        pdf.setFont("helvetica", "bold");
         pdf.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-        pdf.text('AVENTURA', pageWidth / 2, 35, { align: 'center' });
+        pdf.text("AVENTURA", pageWidth / 2, 12, { align: "center" });
 
-        // Elementos decorativos (simulando fogata y antorcha)
+        // Elementos decorativos (muy pequeños)
         pdf.setFillColor(255, 140, 0);
-        pdf.circle(50, 40, 3, 'F');
+        pdf.circle(12, 14, 1, "F");
         pdf.setFillColor(255, 69, 0);
-        pdf.circle(pageWidth - 50, 40, 3, 'F');
+        pdf.circle(pageWidth - 12, 14, 1, "F");
 
-        // Marco para foto del alumno
-        const photoX = 40;
-        const photoY = 60;
-        const photoWidth = 50;
-        const photoHeight = 60;
-        
+        // Marco para foto del alumno (muy compacto)
+        const photoX = 8;
+        const photoY = 20;
+        const photoWidth = 18;
+        const photoHeight = 20;
+
         // Fondo rosa para el marco
         pdf.setFillColor(255, 192, 203);
-        pdf.roundedRect(photoX - 3, photoY - 3, photoWidth + 6, photoHeight + 6, 3, 3, 'F');
-        
+        pdf.roundedRect(
+          photoX - 2,
+          photoY - 2,
+          photoWidth + 4,
+          photoHeight + 4,
+          2,
+          2,
+          "F"
+        );
+
         // Marco blanco
         pdf.setFillColor(255, 255, 255);
-        pdf.roundedRect(photoX, photoY, photoWidth, photoHeight, 2, 2, 'F');
+        pdf.roundedRect(photoX, photoY, photoWidth, photoHeight, 1, 1, "F");
 
         // Insertar foto del alumno
         if (formData.fotoAlumno) {
           try {
-            pdf.addImage(formData.fotoAlumno, 'JPEG', photoX + 2, photoY + 2, photoWidth - 4, photoHeight - 4);
+            pdf.addImage(
+              formData.fotoAlumno,
+              "JPEG",
+              photoX + 1,
+              photoY + 1,
+              photoWidth - 2,
+              photoHeight - 2
+            );
           } catch (error) {
-            console.error('Error al agregar foto del alumno:', error);
+            console.error("Error al agregar foto del alumno:", error);
           }
         }
 
-        // Campo NOMBRE
+        // Campo NOMBRE (muy compacto)
         pdf.setFillColor(52, 152, 219);
-        pdf.roundedRect(40, 135, 130, 12, 2, 2, 'F');
-        pdf.setFontSize(12);
-        pdf.setFont('helvetica', 'bold');
+        pdf.roundedRect(8, 45, pageWidth - 16, 6, 1, 1, "F");
+        pdf.setFontSize(6);
+        pdf.setFont("helvetica", "bold");
         pdf.setTextColor(255, 255, 255);
-        pdf.text('NOMBRE', 45, 143);
-        
+        pdf.text("NOMBRE", 9, 49);
+
         // Valor del nombre
-        pdf.setFontSize(14);
-        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(7);
+        pdf.setFont("helvetica", "normal");
         pdf.setTextColor(textColor[0], textColor[1], textColor[2]);
-        pdf.text(formData.nombre || '', 45, 158);
+        pdf.text(formData.nombre || "", 9, 56);
 
         // Campo CATEGORÍA
         pdf.setFillColor(52, 152, 219);
-        pdf.roundedRect(40, 175, 130, 12, 2, 2, 'F');
-        pdf.setFontSize(12);
-        pdf.setFont('helvetica', 'bold');
+        pdf.roundedRect(8, 62, pageWidth - 16, 6, 1, 1, "F");
+        pdf.setFontSize(6);
+        pdf.setFont("helvetica", "bold");
         pdf.setTextColor(255, 255, 255);
-        pdf.text('CATEGORÍA:', 45, 183);
-        
+        pdf.text("CATEGORÍA:", 9, 66);
+
         // Valor de la categoría
-        pdf.setFontSize(14);
-        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(7);
+        pdf.setFont("helvetica", "normal");
         pdf.setTextColor(textColor[0], textColor[1], textColor[2]);
-        pdf.text(formData.categoria || '', 45, 198);
+        pdf.text(formData.categoria || "", 9, 73);
 
-        // Campo FOLIO con código de barras
+        // Campo FOLIO
         pdf.setFillColor(52, 152, 219);
-        pdf.roundedRect(40, 215, 130, 12, 2, 2, 'F');
-        pdf.setFontSize(12);
-        pdf.setFont('helvetica', 'bold');
+        pdf.roundedRect(8, 79, pageWidth - 16, 6, 1, 1, "F");
+        pdf.setFontSize(6);
+        pdf.setFont("helvetica", "bold");
         pdf.setTextColor(255, 255, 255);
-        pdf.text('FOLIO:', 45, 223);
-          
-        // Texto del folio
-        pdf.setFontSize(10);
-        pdf.setTextColor(textColor[0], textColor[1], textColor[2]);
-        pdf.text(formData.folio, 75, 240, { align: 'justify' });
+        pdf.text("FOLIO:", 9, 83);
 
-        // Dragón decorativo (simulado con formas)
+        // Texto del folio
+        pdf.setFontSize(6);
+        pdf.setTextColor(textColor[0], textColor[1], textColor[2]);
+        pdf.text(formData.folio, 9, 90);
+
+        // Dragón decorativo (muy pequeño)
         pdf.setFillColor(52, 152, 219);
-        pdf.circle(15, 180, 8, 'F');
+        pdf.circle(5, 60, 2, "F");
         pdf.setFillColor(255, 255, 255);
-        pdf.circle(12, 175, 2, 'F');
-        pdf.circle(18, 175, 2, 'F');
+        pdf.circle(4, 58, 0.5, "F");
+        pdf.circle(6, 58, 0.5, "F");
 
         // ==================== PÁGINA 2: PERSONAS AUTORIZADAS ====================
-        
+
         pdf.addPage();
-        
+
         // Fondo de la segunda página
         pdf.setFillColor(240, 240, 255);
-        pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+        pdf.rect(0, 0, pageWidth, pageHeight, "F");
 
-        // Título
-        pdf.setFontSize(18);
-        pdf.setFont('helvetica', 'bold');
+        // Título (muy compacto)
+        pdf.setFontSize(8);
+        pdf.setFont("helvetica", "bold");
         pdf.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-        pdf.text('PERSONAS AUTORIZADAS PARA', 20, 30);
-        pdf.text('RECOGER AL NIÑO', 20, 45);
+        pdf.text("PERSONAS AUTORIZADAS", 5, 12);
+        pdf.text("PARA RECOGER AL NIÑO", 5, 18);
 
         // Configuración para las tres personas autorizadas
         const personasData = [
           { nombre: formData.autorizado1, foto: formData.foto1 },
           { nombre: formData.autorizado2, foto: formData.foto2 },
-          { nombre: formData.autorizado3, foto: formData.foto3 }
+          { nombre: formData.autorizado3, foto: formData.foto3 },
         ];
 
-        let currentY = 70;
-        
+        let currentY = 25;
+
         personasData.forEach((persona, index) => {
-          // Marco para foto
-          const fotoX = 20;
+          // Marco para foto (muy pequeño)
+          const fotoX = 5;
           const fotoY = currentY;
-          const fotoSize = 35;
-          
+          const fotoSize = 12;
+
           // Fondo azul oscuro para el marco de foto
           pdf.setFillColor(41, 128, 185);
-          pdf.roundedRect(fotoX - 2, fotoY - 2, fotoSize + 4, fotoSize + 4, 2, 2, 'F');
-          
+          pdf.roundedRect(
+            fotoX - 0.5,
+            fotoY - 0.5,
+            fotoSize + 1,
+            fotoSize + 1,
+            0.5,
+            0.5,
+            "F"
+          );
+
           // Marco blanco para la foto
           pdf.setFillColor(255, 255, 255);
-          pdf.roundedRect(fotoX, fotoY, fotoSize, fotoSize, 1, 1, 'F');
+          pdf.roundedRect(fotoX, fotoY, fotoSize, fotoSize, 0.5, 0.5, "F");
 
           // Insertar foto
           if (persona.foto) {
             try {
-              pdf.addImage(persona.foto, 'JPEG', fotoX + 1, fotoY + 1, fotoSize - 2, fotoSize - 2);
+              pdf.addImage(
+                persona.foto,
+                "JPEG",
+                fotoX + 0.5,
+                fotoY + 0.5,
+                fotoSize - 1,
+                fotoSize - 1
+              );
             } catch (error) {
               console.error(Error al agregar foto ${index + 1}:, error);
             }
           }
 
-          // Campos de información
-          const fieldX = 70;
-          const fieldWidth = 120;
-          const fieldHeight = 8;
-          
-          // Tres campos por persona
-          for (let i = 0; i < 1; i++) {
-            const fieldY = currentY + (i * 12);
-            
-            // Fondo azul para el campo
-            pdf.setFillColor(52, 152, 219);
-            pdf.roundedRect(fieldX, fieldY, fieldWidth, fieldHeight, 1, 1, 'F');
-            
-            // Texto del nombre solo en el primer campo
-            if (i === 0 && persona.nombre) {
-              pdf.setFontSize(10);
-              pdf.setFont('helvetica', 'normal');
-              pdf.setTextColor(255, 255, 255);
-              pdf.text(persona.nombre, fieldX + 3, fieldY + 5);
-            }
+          // Campo de información (nombre)
+          const fieldX = 20;
+          const fieldWidth = pageWidth - 25;
+          const fieldHeight = 4;
+          const fieldY = currentY + 4;
+
+          // Fondo azul para el campo
+          pdf.setFillColor(52, 152, 219);
+          pdf.roundedRect(
+            fieldX,
+            fieldY,
+            fieldWidth,
+            fieldHeight,
+            0.5,
+            0.5,
+            "F"
+          );
+
+          // Texto del nombre
+          if (persona.nombre) {
+            pdf.setFontSize(5);
+            pdf.setFont("helvetica", "normal");
+            pdf.setTextColor(255, 255, 255);
+            pdf.text(persona.nombre, fieldX + 1, fieldY + 2.5);
           }
-          
-          currentY += 60;
+
+          currentY += 20;
         });
 
-        // Elementos decorativos laterales
+        // Elementos decorativos laterales (muy pequeños para el formato compacto)
         pdf.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-        pdf.triangle(pageWidth - 30, 100, pageWidth - 15, 85, pageWidth - 5, 100, 'F');
-        pdf.triangle(pageWidth - 30, 160, pageWidth - 15, 145, pageWidth - 5, 160, 'F');
-        pdf.triangle(pageWidth - 30, 220, pageWidth - 15, 205, pageWidth - 5, 220, 'F');
+        pdf.triangle(
+          pageWidth - 8,
+          35,
+          pageWidth - 5,
+          30,
+          pageWidth - 2,
+          35,
+          "F"
+        );
+        pdf.triangle(
+          pageWidth - 8,
+          55,
+          pageWidth - 5,
+          50,
+          pageWidth - 2,
+          55,
+          "F"
+        );
+        pdf.triangle(
+          pageWidth - 8,
+          75,
+          pageWidth - 5,
+          70,
+          pageWidth - 2,
+          75,
+          "F"
+        );
 
         // Guardar el PDF
-        const fileName = Aventura_${formData.nombre ? formData.nombre.replace(/\s+/g, '_') : 'Alumno'}_${formData.folio || 'Sin_Folio'}.pdf;
+        const fileName = `Aventura_${
+          formData.nombre ? formData.nombre.replace(/\s+/g, "_") : "Alumno"
+        }_${formData.folio || "Sin_Folio"}.pdf`;
         pdf.save(fileName);
       }
 
       // Manejar envío del formulario
-      document.getElementById('formulario').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const submitBtn = document.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        
-        try {
-          // Cambiar texto del botón
-          submitBtn.textContent = '📄 Generando PDF...';
-          submitBtn.disabled = true;
+      document
+        .getElementById("formulario")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
 
-          // Recopilar datos del formulario
-          const formData = {
-            nombre: document.getElementById('nombre').value,
-            categoria: document.getElementById('categoria').value,
-            folio: document.getElementById('folio').value,
-            autorizado1: document.getElementById('autorizado1').value,
-            autorizado2: document.getElementById('autorizado2').value,
-            autorizado3: document.getElementById('autorizado3').value
-          };
+          const submitBtn = document.querySelector(".submit-btn");
+          const originalText = submitBtn.textContent;
 
-          // Convertir imágenes a base64
-          const files = ['fotoAlumno', 'foto1', 'foto2', 'foto3'];
-          for (const fileId of files) {
-            const fileInput = document.getElementById(fileId);
-            if (fileInput.files[0]) {
-              formData[fileId] = await fileToBase64(fileInput.files[0]);
+          try {
+            // Cambiar texto del botón
+            submitBtn.textContent = "📄 Generando PDF...";
+            submitBtn.disabled = true;
+
+            // Recopilar datos del formulario
+            const formData = {
+              nombre: document.getElementById("nombre").value,
+              categoria: document.getElementById("categoria").value,
+              folio: document.getElementById("folio").value,
+              autorizado1: document.getElementById("autorizado1").value,
+              autorizado2: document.getElementById("autorizado2").value,
+              autorizado3: document.getElementById("autorizado3").value,
+            };
+
+            // Convertir imágenes a base64
+            const files = ["fotoAlumno", "foto1", "foto2", "foto3"];
+            for (const fileId of files) {
+              const fileInput = document.getElementById(fileId);
+              if (fileInput.files[0]) {
+                formData[fileId] = await fileToBase64(fileInput.files[0]);
+              }
             }
-          }
 
-          // Generar PDF
-          await generatePDF(formData);
-          
-          // Mostrar mensaje de éxito
-          alert('✅ PDF generado exitosamente!');
-          
-        } catch (error) {
-          console.error('Error al generar PDF:', error);
-          alert('❌ Error al generar el PDF. Por favor, intenta nuevamente.');
-        } finally {
-          // Restaurar botón
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-        }
-      });
+            // Generar PDF
+            await generatePDF(formData);
+
+            // Mostrar mensaje de éxito
+            alert("✅ PDF generado exitosamente!");
+          } catch (error) {
+            console.error("Error al generar PDF:", error);
+            alert("❌ Error al generar el PDF. Por favor, intenta nuevamente.");
+          } finally {
+            // Restaurar botón
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+          }
+        });
     </script>
   </body>
 </html>
