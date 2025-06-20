@@ -1,0 +1,202 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  position: relative; /* Necesario para el posicionamiento del dragón */
+}
+
+/* Imagen del dragón en la izquierda */
+body::before {
+  content: "";
+  position: fixed;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 350px;
+  height: 350px;
+  background-image: url("/imagenes/Aguila_2.png"); /* Ajusta la ruta según tu estructura */
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 0; /* Detrás del contenido pero encima del fondo */
+}
+
+/* Imagen del dragón en la derecha */
+body::after {
+  content: "";
+  position: fixed;
+  right: -120px; /* Espejo de la posición izquierda */
+  top: 50%;
+  transform: translateY(-50%); /* Voltea horizontalmente + rotación */
+  width: 350px;
+  height: 350px;
+  background-image: url("/imagenes/Aguila_2_Inverted.png"); /* Ajusta la ruta según tu estructura */
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* Asegurar que el contenido esté por encima del dragón */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  /* Mantenemos el degradado de fondo para el div.header */
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  padding: 20px; /* Padding interno para dar espacio al contenido */
+
+  /* ***** PROPIEDADES CLAVE PARA CENTRAR EL CONTENIDO INTERNO ***** */
+  display: flex; /* Habilita Flexbox */
+  flex-direction: column; /* Organiza los elementos hijos (logo, h1, p) en una columna */
+  justify-content: center; /* Centra los elementos hijos verticalmente */
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+  gap: 10px; /* Espacio entre los elementos (imagen, h1, p) */
+}
+
+/* Estilos para el logo dentro del header */
+.header-logo {
+  max-width: 80%; /* Ajusta el tamaño máximo de la imagen para que se vea uniforme */
+  /* Los porcentajes ajustan mejor la imagen*/
+  height: auto; /* Mantiene la proporción de la imagen al escalar */
+  object-fit: contain; /* Asegura que la imagen completa sea visible, sin recortarse */
+  /* Si quieres que llene el espacio y se recorte si es necesario, usa 'cover' */
+  display: block; /* Asegura que la imagen sea un bloque para un mejor control del espaciado */
+  margin: 0 auto; /* Centra la imagen si el flexbox no fuera suficiente, o para navegadores antiguos */
+}
+
+.form-container {
+  padding: 40px;
+}
+
+fieldset {
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 25px;
+  margin-bottom: 30px;
+  background: #f9fafb;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #4f46e5;
+  padding: 0 15px;
+  background: white;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #374151;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+  border-color: #4f46e5;
+}
+
+.autorizado {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #e5e7eb;
+}
+
+.autorizado h4 {
+  color: #4f46e5;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.preview-container {
+  margin-top: 15px;
+  display: none;
+}
+
+.preview-img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 10px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+}
