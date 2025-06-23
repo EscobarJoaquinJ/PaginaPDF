@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cursos de Verano</title>
 
-    <!-- 👇 AQUÍ SE REFERENCIA EL CSS EXTERNO -->
     <link rel="stylesheet" href="/Recursos_CSS/Estilos.css" />
   </head>
   <body>
@@ -86,6 +85,15 @@
                 />
               </div>
               <div class="form-group">
+                <label for="parentesco1">Parentesco:</label>
+                <input
+                  type="text"
+                  id="parentesco1"
+                  name="parentesco1"
+                  placeholder="Ej: Padre, Madre, Tío(a), etc."
+                />
+              </div>
+              <div class="form-group">
                 <label for="foto1">Foto:</label>
                 <input type="file" id="foto1" name="foto1" accept="image/*" />
                 <div class="preview-container" id="preview1">
@@ -103,6 +111,15 @@
                   id="autorizado2"
                   name="autorizado2"
                   placeholder="Nombre de la segunda persona autorizada"
+                />
+              </div>
+              <div class="form-group">
+                <label for="parentesco2">Parentesco:</label>
+                <input
+                  type="text"
+                  id="parentesco2"
+                  name="parentesco2"
+                  placeholder="Ej: Padre, Madre, Tío(a), etc."
                 />
               </div>
               <div class="form-group">
@@ -126,6 +143,15 @@
                 />
               </div>
               <div class="form-group">
+                <label for="parentesco3">Parentesco:</label>
+                <input
+                  type="text"
+                  id="parentesco3"
+                  name="parentesco3"
+                  placeholder="Ej: Padre, Madre, Tío(a), etc."
+                />
+              </div>
+              <div class="form-group">
                 <label for="foto3">Foto:</label>
                 <input type="file" id="foto3" name="foto3" accept="image/*" />
                 <div class="preview-container" id="preview3">
@@ -139,8 +165,7 @@
         </form>
       </div>
     </div>
-    <!-- Librería para generar PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="/Recursos_JS/Generar_PDF.js"></script>
+    <script src="Generar_PDF.js"></script>
   </body>
 </html>
